@@ -31,7 +31,7 @@ makeTable <- function( sourcePath, savePath, groupName,
   table <- data.frame(
       Username      = userName[studentFilter],
       Group         = rep(groupName, length(studentFilter)),
-      Password      = lastName[studentFilter],
+      Password      = randomString(length(studentFilter)),
       FullName      = paste( firstName[studentFilter], lastName[studentFilter]),
       Email         = paste(userName[studentFilter], "@wlu.edu", sep = ""),
       TimeLimit     = rep(timelimit, length(studentFilter)),
@@ -46,4 +46,15 @@ makeTable <- function( sourcePath, savePath, groupName,
   
   return(table)
   
+}
+
+randomString <- function(n = 1, len = 6) {
+  sapply(1:n, function(n) {
+    paste( sample( c(0:9, LETTERS)
+                   , 6
+                   , replace = TRUE
+    )
+    , collapse = ""
+    )
+  })
 }
